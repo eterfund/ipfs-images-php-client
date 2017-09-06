@@ -1,0 +1,9 @@
+{
+  "name": "theowl/attachments-client",
+  "description": "A wrapper to access attachments server HTTP API",
+  "autoload": {
+    "psr-4": {
+      "AttachmentsClient\\": "src/"
+    }
+  }
+}
