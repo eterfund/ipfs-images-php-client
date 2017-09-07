@@ -7,6 +7,7 @@
     }
   },
   "require": {
+    "evert/phpdoc-md" : "~0.2.0",
     "guzzlehttp/guzzle": "^6.3"
   }
 }

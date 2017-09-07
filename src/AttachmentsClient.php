@@ -11,9 +11,9 @@ class AttachmentsClient {
   private $client;
 
   /**
-   * Creates a new client instance.
+   * Создаёт экземпляр клиента.
    * 
-   * @param string $baseUrl Base URL for attachment server API
+   * @param string $baseUrl Base URL сервера вложений
    */
   function __construct ($baseUrl) {
     $this->baseUrl = $this->ensureNotEndsWithSlash($baseUrl);
@@ -23,11 +23,14 @@ class AttachmentsClient {
   // *** Public API methods ***
 
   /**
-   * Uploads a file from filesystem to attachments server.
+   * Загружает файл с диска на сервер (по имени файла).
+   * Возвращает ссылку на загрузку файла (с учётом baseUrl,
+   * переданного в конструктор)
+   * При ошибках выбрасывается исключение.
    * 
-   * @param string $filename Path to file to be uploaded
+   * @param string $filename Путь к файлу
    * 
-   * @return string Download link for the file
+   * @return string
    */
   public function uploadFromFile ($filename) {
     $data = file_get_contents($filename);
@@ -35,12 +38,15 @@ class AttachmentsClient {
   }
 
   /**
-   * Uploads data from memory to attachments server.
+   * Загружает файл из памяти на сервер.
+   * Возвращает ссылку на загрузку файла (с учётом baseUrl,
+   * переданного в конструктор)
+   * При ошибках выбрасывается исключение.
    * 
-   * @param string $file File data to be uploaded, stored in memory
-   * @param string $name (optional) Name of file to be passed to server
+   * @param string $data Данные для загрузки
+   * @param string $name (необязательно) Имя файла, по умолчанию - file
    * 
-   * @return string Download link for the file
+   * @return string
    */
   public function uploadFromMemory ($data, $name = 'file') {
     $url = $this->getFullMethodUrl('/ul');
