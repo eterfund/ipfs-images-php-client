@@ -5,5 +5,8 @@
     "psr-4": {
       "AttachmentsClient\\": "src/"
     }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^6.3"
   }
 }
