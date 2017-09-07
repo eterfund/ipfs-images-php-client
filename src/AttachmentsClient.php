@@ -10,6 +10,11 @@ class AttachmentsClient {
   private $baseUrl;
   private $client;
 
+  /**
+   * Creates a new client instance.
+   * 
+   * @param string $baseUrl Base URL for attachment server API
+   */
   function __construct ($baseUrl) {
     $this->baseUrl = $this->ensureNotEndsWithSlash($baseUrl);
     $this->client = new Client();
@@ -22,7 +27,7 @@ class AttachmentsClient {
    * 
    * @param string $filename Path to file to be uploaded
    * 
-   * @return string Hash of uploaded file
+   * @return string Download link for the file
    */
   public function uploadFromFile ($filename) {
     $data = file_get_contents($filename);
@@ -35,20 +40,24 @@ class AttachmentsClient {
    * @param string $file File data to be uploaded, stored in memory
    * @param string $name (optional) Name of file to be passed to server
    * 
-   * @return string Hash of uploaded file
+   * @return string Download link for the file
    */
   public function uploadFromMemory ($data, $name = 'file') {
     $url = $this->getFullMethodUrl('/ul');
     $result = $this->sendPostRequestWithFile ($url, $data, $name);
 
     $json = json_decode($result, true);
-    return $json['id'];
+    return $this->getDownloadUrl($json['id'], $json['filename']);
   }
 
   // *** End of public API methods ***
 
   private function ensureNotEndsWithSlash ($url) {
     return rtrim($url, '/');
+  }
+
+  private function getDownloadUrl ($hash, $name) {
+    return $this->baseUrl . '/dl/' . $hash . '/' . $name;
   }
 
   private function getFullMethodUrl ($method) {
@@ -65,8 +74,6 @@ class AttachmentsClient {
         ]
       ]
     ]);
-
-    echo $response->getBody();
 
     if ($response->getStatusCode() !== 200) {
       $message =
