@@ -31,7 +31,20 @@ class AttachmentsClient {
    * @return string
    */
   public function getDownloadUrl ($hash, $name) {
-    return $this->baseUrl . '/dl/' . $hash . '/' . $name;
+    return "$this->baseUrl/dl/$hash/$name";
+  }
+
+  /**
+   * Возвращает URL для миниатюры (thumbnail) изображения.
+   * 
+   * @param string $hash Хэш файла, полученный от метода загрузки.
+   * @param int $size (необязательно) Размер миниатюры в пикселях, по
+   * умолчанию - 128
+   * 
+   * @return string
+   */
+  public function getThumbnailUrl ($hash, $name) {
+    return "$this->baseUrl/dl/thumb/$size/$hash";
   }
 
   /**

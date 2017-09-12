@@ -52,6 +52,23 @@ Methods
 
 
 
+### getThumbnailUrl
+
+    string AttachmentsClient\AttachmentsClient::getThumbnailUrl(string $hash, $name)
+
+Возвращает URL для миниатюры (thumbnail) изображения.
+
+
+
+* Visibility: **public**
+
+
+#### Arguments
+* $hash **string** - &lt;p&gt;Хэш файла, полученный от метода загрузки.&lt;/p&gt;
+* $name **mixed**
+
+
+
 ### uploadFromFile
 
     string AttachmentsClient\AttachmentsClient::uploadFromFile(string $filename)
