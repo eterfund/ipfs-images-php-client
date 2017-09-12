@@ -23,9 +23,20 @@ class AttachmentsClient {
   // *** Public API methods ***
 
   /**
+   * Возвращает URL для скачивания файла по его хэшу и имени.
+   * 
+   * @param string $hash Хэш файла, полученный от метода загрузки.
+   * @param string $name (необязательно) Имя файла, по умолчанию - file
+   * 
+   * @return string
+   */
+  public function getDownloadUrl ($hash, $name) {
+    return $this->baseUrl . '/dl/' . $hash . '/' . $name;
+  }
+
+  /**
    * Загружает файл с диска на сервер (по имени файла).
-   * Возвращает ссылку на загрузку файла (с учётом baseUrl,
-   * переданного в конструктор).
+   * Возвращает хэш загруженного файла.
    * При ошибках выбрасывается исключение.
    * 
    * @param string $filename Путь к файлу
@@ -42,8 +53,7 @@ class AttachmentsClient {
 
   /**
    * Загружает файл из памяти на сервер.
-   * Возвращает ссылку на загрузку файла (с учётом baseUrl,
-   * переданного в конструктор).
+   * Возвращает хэш загруженного файла.
    * При ошибках выбрасывается исключение.
    * 
    * @param mixed $data Данные для загрузки - строка (string) или поток (stream)
@@ -52,21 +62,29 @@ class AttachmentsClient {
    * @return string
    */
   public function uploadFromMemory ($data, $name = 'file') {
-    $url = $this->getFullMethodUrl('/ul');
+    $url = $this->getUploadUrl();
     $result = $this->sendPostRequestWithFile ($url, $data, $name);
 
     $json = json_decode($result, true);
-    return $this->getDownloadUrl($json['id'], $json['filename']);
+    return $json['id'];
   }
 
   // *** End of public API methods ***
 
-  private function ensureNotEndsWithSlash ($url) {
-    return rtrim($url, '/');
+  /**
+   * Возвращает URL для заливки (upload) файла. Вынесено в отдельный
+   * protected-метод, чтобы можно было переопределить это в субклассе,
+   * на случай если сервер использует нестандартное название для
+   * метода загрузки.
+   * 
+   * @return string
+   */
+  protected function getUploadUrl () {
+    return $this->getFullMethodUrl('/ul');
   }
 
-  private function getDownloadUrl ($hash, $name) {
-    return $this->baseUrl . '/dl/' . $hash . '/' . $name;
+  private function ensureNotEndsWithSlash ($url) {
+    return rtrim($url, '/');
   }
 
   private function getFullMethodUrl ($method) {

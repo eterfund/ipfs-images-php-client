@@ -35,14 +35,30 @@ Methods
 
 
 
+### getDownloadUrl
+
+    string AttachmentsClient\AttachmentsClient::getDownloadUrl(string $hash, string $name)
+
+Возвращает URL для скачивания файла по его хэшу и имени.
+
+
+
+* Visibility: **public**
+
+
+#### Arguments
+* $hash **string** - &lt;p&gt;Хэш файла, полученный от метода загрузки.&lt;/p&gt;
+* $name **string** - &lt;p&gt;(необязательно) Имя файла, по умолчанию - file&lt;/p&gt;
+
+
+
 ### uploadFromFile
 
     string AttachmentsClient\AttachmentsClient::uploadFromFile(string $filename)
 
 Загружает файл с диска на сервер (по имени файла).
 
-Возвращает ссылку на загрузку файла (с учётом baseUrl,
-переданного в конструктор)
+Возвращает хэш загруженного файла.
 При ошибках выбрасывается исключение.
 
 * Visibility: **public**
@@ -55,19 +71,34 @@ Methods
 
 ### uploadFromMemory
 
-    string AttachmentsClient\AttachmentsClient::uploadFromMemory(string $data, string $name)
+    string AttachmentsClient\AttachmentsClient::uploadFromMemory(mixed $data, string $name)
 
 Загружает файл из памяти на сервер.
 
-Возвращает ссылку на загрузку файла (с учётом baseUrl,
-переданного в конструктор)
+Возвращает хэш загруженного файла.
 При ошибках выбрасывается исключение.
 
 * Visibility: **public**
 
 
 #### Arguments
-* $data **string** - &lt;p&gt;Данные для загрузки&lt;/p&gt;
+* $data **mixed** - &lt;p&gt;Данные для загрузки - строка (string) или поток (stream)&lt;/p&gt;
 * $name **string** - &lt;p&gt;(необязательно) Имя файла, по умолчанию - file&lt;/p&gt;
+
+
+
+### getUploadUrl
+
+    string AttachmentsClient\AttachmentsClient::getUploadUrl()
+
+Возвращает URL для заливки (upload) файла. Вынесено в отдельный
+protected-метод, чтобы можно было переопределить это в субклассе,
+на случай если сервер использует нестандартное название для
+метода загрузки.
+
+
+
+* Visibility: **protected**
+
 
 

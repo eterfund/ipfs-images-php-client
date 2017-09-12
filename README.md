@@ -34,7 +34,7 @@ $ composer install
 
 Чтобы сгенерировать документацию (нужен phpdoc):
 ```
-$ phpdoc -d src -t docs --visibility=public --template=xml
+$ phpdoc -d src -t docs --visibility=public,protected --template=xml
 $ vendor/bin/phpdocmd docs/structure.xml
 ```
 
