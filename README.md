@@ -38,7 +38,8 @@ $ phpdoc -d src -t docs --visibility=public,protected --template=xml
 $ vendor/bin/phpdocmd docs/structure.xml
 ```
 
-## Пример использования:
+## Пример использования
+Создайте PHP-скрипт (например, `index.php`):
 ```
 <?php
 
@@ -46,8 +47,24 @@ require('vendor/autoload.php');
 
 use AttachmentsClient\AttachmentsClient;
 
-$client = new AttachmentsClient('http://localhost:8100');
-echo($client->uploadFromFile('composer.json'));
+$client = new AttachmentsClient('http://img.azbyka.ru');
+echo "Trying file upload:\n";
+echo $client->uploadFromFile(__FILE__);
+echo "\n\n";
 
+$file = file_get_contents(__FILE__);
+echo "Trying memory upload:\n";
+$hash = $client->uploadFromMemory($file);
+echo $hash . "\n\n";
+
+$url = $client->getDownloadUrl($hash, basename(__FILE__));
+echo "Download URL: $url\n";
 ?>
+```
+
+Этот скрипт загружает в хранилище сам себя двумя способами:
+из файла потоком и из памяти, после чего выводит URL для скачивания.
+Запустить его можно в командной строке:
+```
+$ php index.php
 ```
