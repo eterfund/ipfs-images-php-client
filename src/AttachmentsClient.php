@@ -25,7 +25,7 @@ class AttachmentsClient {
   /**
    * Загружает файл с диска на сервер (по имени файла).
    * Возвращает ссылку на загрузку файла (с учётом baseUrl,
-   * переданного в конструктор)
+   * переданного в конструктор).
    * При ошибках выбрасывается исключение.
    * 
    * @param string $filename Путь к файлу
@@ -33,17 +33,20 @@ class AttachmentsClient {
    * @return string
    */
   public function uploadFromFile ($filename) {
-    $data = file_get_contents($filename);
-    return $this->uploadFromMemory($data, basename($filename));    
+    $stream = fopen($filename, 'rb');
+    if (!$stream) {
+      throw new Exception("Failed to open $filename");
+    }
+    return $this->uploadFromMemory($stream, basename($filename));
   }
 
   /**
    * Загружает файл из памяти на сервер.
    * Возвращает ссылку на загрузку файла (с учётом baseUrl,
-   * переданного в конструктор)
+   * переданного в конструктор).
    * При ошибках выбрасывается исключение.
    * 
-   * @param string $data Данные для загрузки
+   * @param mixed $data Данные для загрузки - строка (string) или поток (stream)
    * @param string $name (необязательно) Имя файла, по умолчанию - file
    * 
    * @return string
