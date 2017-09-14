@@ -1,9 +1,9 @@
 {
-  "name": "theowl/attachments-client",
-  "description": "A wrapper to access attachments server HTTP API",
+  "name": "ipfs-images/ipfs-images-php-client",
+  "description": "A wrapper to access IPFS images server HTTP API",
   "autoload": {
     "psr-4": {
-      "AttachmentsClient\\": "src/"
+      "IpfsImagesClient\\": "src/"
     }
   },
   "require": {

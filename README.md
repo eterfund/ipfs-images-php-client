@@ -1,7 +1,7 @@
-# Attachments PHP client
+# IPFS images server PHP client
 
 Эта библиотека предоставляет интерфейс на PHP для загрузки файлов на
-сервер вложений.
+сервер изображений.
 
 Поддерживается загрузка файлов с диска и из памяти.
 
@@ -11,18 +11,17 @@
 ```
 {
   "require": {
-    "theowl/attachments-client": "dev-master"
+    "ipfs-images/ipfs-images-php-client": "dev-master"
   },
   "repositories": [
     {
       "type": "vcs",
-      "url":  "<attachments-client-repo>"
+      "url":  "git@gitlab.eterfund.ru:ipfs-images/ipfs-images-php-client.git"
     }
   ]
 }
 ```
 
-`<attachments-client-repo>` нужно заменить на адрес репозитория.
 После этого выполнить:
 ```
 $ composer install
@@ -45,9 +44,9 @@ $ vendor/bin/phpdocmd docs/structure.xml
 
 require('vendor/autoload.php');
 
-use AttachmentsClient\AttachmentsClient;
+use IpfsImagesClient\IpfsImagesClient;
 
-$client = new AttachmentsClient('http://img.azbyka.ru');
+$client = new IpfsImagesClient('http://img.azbyka.ru');
 echo "Trying file upload:\n";
 echo $client->uploadFromFile(__FILE__);
 echo "\n\n";

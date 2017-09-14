@@ -1,12 +1,12 @@
 <?php
 
-namespace AttachmentsClient;
+namespace IpfsImagesClient;
 
 require('vendor/autoload.php');
 
 use GuzzleHttp\Client;
 
-class AttachmentsClient {
+class IpfsImagesClient {
   private $baseUrl;
   private $client;
 

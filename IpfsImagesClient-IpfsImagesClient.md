@@ -1,4 +1,4 @@
-AttachmentsClient\AttachmentsClient
+IpfsImagesClient\IpfsImagesClient
 ===============
 
 
@@ -6,8 +6,8 @@ AttachmentsClient\AttachmentsClient
 
 
 
-* Class name: AttachmentsClient
-* Namespace: AttachmentsClient
+* Class name: IpfsImagesClient
+* Namespace: IpfsImagesClient
 
 
 
@@ -21,7 +21,7 @@ Methods
 
 ### __construct
 
-    mixed AttachmentsClient\AttachmentsClient::__construct(string $baseUrl)
+    mixed IpfsImagesClient\IpfsImagesClient::__construct(string $baseUrl)
 
 Создаёт экземпляр клиента.
 
@@ -37,7 +37,7 @@ Methods
 
 ### getDownloadUrl
 
-    string AttachmentsClient\AttachmentsClient::getDownloadUrl(string $hash, string $name)
+    string IpfsImagesClient\IpfsImagesClient::getDownloadUrl(string $hash, string $name)
 
 Возвращает URL для скачивания файла по его хэшу и имени.
 
@@ -54,7 +54,7 @@ Methods
 
 ### getThumbnailUrl
 
-    string AttachmentsClient\AttachmentsClient::getThumbnailUrl(string $hash, $name)
+    string IpfsImagesClient\IpfsImagesClient::getThumbnailUrl(string $hash, $name)
 
 Возвращает URL для миниатюры (thumbnail) изображения.
 
@@ -71,7 +71,7 @@ Methods
 
 ### uploadFromFile
 
-    string AttachmentsClient\AttachmentsClient::uploadFromFile(string $filename)
+    string IpfsImagesClient\IpfsImagesClient::uploadFromFile(string $filename)
 
 Загружает файл с диска на сервер (по имени файла).
 
@@ -88,7 +88,7 @@ Methods
 
 ### uploadFromMemory
 
-    string AttachmentsClient\AttachmentsClient::uploadFromMemory(mixed $data, string $name)
+    string IpfsImagesClient\IpfsImagesClient::uploadFromMemory(mixed $data, string $name)
 
 Загружает файл из памяти на сервер.
 
@@ -106,7 +106,7 @@ Methods
 
 ### getUploadUrl
 
-    string AttachmentsClient\AttachmentsClient::getUploadUrl()
+    string IpfsImagesClient\IpfsImagesClient::getUploadUrl()
 
 Возвращает URL для заливки (upload) файла. Вынесено в отдельный
 protected-метод, чтобы можно было переопределить это в субклассе,

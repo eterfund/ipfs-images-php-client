@@ -1,6 +1,6 @@
 API Index
 =========
 
-* AttachmentsClient
-    * [AttachmentsClient](AttachmentsClient-AttachmentsClient.md)
+* IpfsImagesClient
+    * [IpfsImagesClient](IpfsImagesClient-IpfsImagesClient.md)
 
